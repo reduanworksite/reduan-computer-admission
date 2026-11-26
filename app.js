@@ -70,12 +70,11 @@
     await loadBatches();
   }
 
-  /* Backend Settings থেকে পেমেন্ট নম্বর পেলে দেখাও, না পেলে "কল করুন" থাকবে। */
+  /* Backend Settings থেকে bKash পেমেন্ট নম্বর পেলে দেখাও, না পেলে "কল করুন" থাকবে। */
   function applyPaymentNumbers(settings) {
     if (!settings) return;
     const numbers = settings.payment_numbers || settings;
     const bkash = numbers.bkash || numbers.bkash_number;
-    const nagad = numbers.nagad || numbers.nagad_number;
     if (bkash) {
       $("bkashNumberLine").innerHTML = "";
       $("bkashNumberLine").appendChild(document.createTextNode("পেমেন্ট নম্বরে টাকা পাঠান: "));
@@ -84,15 +83,7 @@
       $("bkashNumberLine").appendChild(strong);
       $("bkashNumberLine").appendChild(document.createTextNode("।"));
     }
-    if (nagad) {
-      $("nagadNumberLine").innerHTML = "";
-      $("nagadNumberLine").appendChild(document.createTextNode("পেমেন্ট নম্বরে টাকা পাঠান: "));
-      const strong = document.createElement("strong");
-      strong.textContent = nagad;
-      $("nagadNumberLine").appendChild(strong);
-      $("nagadNumberLine").appendChild(document.createTextNode("।"));
-    }
-    if (bkash || nagad) {
+    if (bkash) {
       $("paymentNumberNote").querySelector("p").innerHTML =
         "<strong>উপরের নম্বরে সঠিকভাবে টাকা পাঠান।</strong> ভুল নম্বরে টাকা পাঠাবেন না — পেমেন্টের আগে নম্বরটি নিশ্চিত করে নিন। প্রয়োজনে কল করুন: <a href=\"tel:01410645030\">01410645030</a>";
     }

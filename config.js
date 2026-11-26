@@ -3,4 +3,4 @@
  * APPS_SCRIPT_URL খালি থাকলে পেজ "Backend সংযুক্ত হয়নি" অবস্থায় চলবে —
  * ব্যাচের তালিকা ও ভর্তি ফরম সাবমিট কাজ করবে না, তবে কোনো ভুয়া তথ্য দেখাবে না।
  */
-const APPS_SCRIPT_URL = "";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZATsE1gMmG1I_ey2TK5ioBenFHinZXz7dYpyV9umECq0aNyByZpQiqWZ-AltAQlgl/exec"; /* Deployed 2026-11-26 as reduan.digital@gmail.com, ping + getSettingsPublic verified. */

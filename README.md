@@ -9,7 +9,7 @@ payment numbers anywhere on this page.
 - Business: **REDUAN COMPUTER** — "শিখুন দক্ষতা, গড়ুন সফল ক্যারিয়ার।"
 - Address: হোসেনপুর থানা মসজিদ সংলগ্ন, হোসেনপুর, কিশোরগঞ্জ, বাংলাদেশ।
 - Phone: 01410645030
-- Payment methods: bKash / Nagad (Send Money)
+- Payment methods: bKash only (Send Money)
 - Classes: Google Meet (Student ID required to join)
 
 ## Files
@@ -35,7 +35,7 @@ payment numbers anywhere on this page.
    backend returns no batches (or is not configured), the page shows the honest
    empty state — "ব্যাচের তালিকা শীঘ্রই আসছে — যোগাযোগ করুন: 01410645030" —
    and blocks progress. Batches are never invented.
-3. **Step 3 — Payment:** bKash / Nagad, sender number, Transaction ID, amount,
+3. **Step 3 — Payment:** bKash only, sender number, Transaction ID, amount,
    payment date, receipt screenshot (image only, max 5 MB, preview before upload,
    client-side compressed to max 1280px JPEG quality 0.8, sent as base64).
 
@@ -51,7 +51,7 @@ Duplicate Transaction ID is detected by the backend and shown as a Bangla error.
    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/XXXX/exec";
    ```
 3. The backend must support actions: `publicGetBatches`, `getSettingsPublic`
-   (optional `payment_numbers` — bkash/nagad; if absent the page shows
+   (optional `payment_numbers` — bkash only; if absent the page shows
    "পেমেন্ট নম্বর জানতে কল করুন: 01410645030"), and `submitAdmission`
    (returns `{ success: true, studentId, submissionDate }` or
    `{ success: false, error: "DUPLICATE_TRANSACTION" }`).
