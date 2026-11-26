@@ -316,14 +316,14 @@ function submitAdmission_(d) {
     row[head['Student ID']] = studentId;
     row[head['Submission Date & Time']] = nowStr;
     row[head['Student Name']] = fullName;
-    row[head['Mobile Number']] = mobile;
-    row[head['WhatsApp Number']] = whatsapp;
+    row[head['Mobile Number']] = textCell_(mobile);
+    row[head['WhatsApp Number']] = textCell_(whatsapp);
     row[head['Email']] = email;
     row[head['Address']] = address;
     row[head['Selected Batch']] = batchName;
     row[head['Payment Method']] = paymentMethod;
-    row[head['Payment Sender Number']] = senderNumber;
-    row[head['Transaction ID']] = transactionId;
+    row[head['Payment Sender Number']] = textCell_(senderNumber);
+    row[head['Transaction ID']] = textCell_(transactionId);
     row[head['Payment Amount']] = amount;
     row[head['Payment Date']] = paymentDate;
     row[head['Receipt File Link']] = receiptUrl;
@@ -505,6 +505,19 @@ function readSettings_() {
 function fmtCellDate_(v) {
   if (v instanceof Date) return Utilities.formatDate(v, TIMEZONE, 'yyyy-MM-dd');
   return String(v === null || v === undefined ? '' : v).trim();
+}
+
+/**
+ * Forces a value to be stored as TEXT in the sheet. Sheets would otherwise
+ * parse a digit-only string like "01700000000" as the number 1700000000
+ * and drop the leading zero (found by the 2026-11-26 end-to-end test).
+ * A leading apostrophe is Sheets' text marker — it is not part of the
+ * stored value, so reads return the digits exactly as typed.
+ */
+function textCell_(v) {
+  var s = String(v === null || v === undefined ? '' : v);
+  if (s === '') return '';
+  return /^\d+$/.test(s) ? "'" + s : s;
 }
 
 /** Strips path characters / unsafe symbols from an uploaded file name. */
