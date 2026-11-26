@@ -32,7 +32,7 @@
  *   "Batches" (6 columns): Batch ID, Batch Name, Start Date, Class Schedule,
  *     Max Students, Status. Only rows with Status "Active" (or an empty
  *     Status with a Batch Name) are shown to students.
- *   "Settings" (optional, Key / Value): payment_bkash, payment_nagad,
+ *   "Settings" (optional, Key / Value): payment_bkash,
  *     business_name, phone, slogan, address. If the sheet or a key is
  *     missing, that value is simply not returned — nothing is invented.
  *
@@ -40,7 +40,7 @@
  *   - No secrets, passwords or payment numbers are hardcoded in this file.
  *     The only phone number in this file is the public contact number
  *     01410645030 (shown on the landing page as "call for payment number"
- *     fallback). bKash/Nagad numbers come ONLY from the Settings sheet.
+ *     fallback). The bKash number comes ONLY from the Settings sheet.
  *   - Receipt files are created PRIVATE (never shared publicly). The owner
  *     opens them from their own Drive.
  *   - All submission writes happen inside LockService.getScriptLock(), so
@@ -187,20 +187,17 @@ function getBatches_() {
 }
 
 /**
- * Returns public business info + payment numbers. Payment numbers come
- * ONLY from the Settings sheet (keys: payment_bkash / bkash / bkash_number
- * and payment_nagad / nagad / nagad_number). If the sheet or a key does
- * not exist, payment_numbers is empty — the frontend then shows
- * "call for payment number" and no number is invented.
- * Shape matches app.js: settings.payment_numbers.{bkash, nagad}.
+ * Returns public business info + the bKash payment number. The number comes
+ * ONLY from the Settings sheet (keys: payment_bkash / bkash / bkash_number).
+ * If the sheet or the key does not exist, payment_numbers is empty — the
+ * frontend then shows "call for payment number" and no number is invented.
+ * Shape matches app.js: settings.payment_numbers.{bkash}.
  */
 function getSettingsPublic_() {
   var settings = readSettings_();
   var paymentNumbers = {};
   var bkash = settings['payment_bkash'] || settings['bkash'] || settings['bkash_number'] || settings['payment_bkash_number'];
-  var nagad = settings['payment_nagad'] || settings['nagad'] || settings['nagad_number'] || settings['payment_nagad_number'];
   if (bkash) paymentNumbers.bkash = String(bkash).trim();
-  if (nagad) paymentNumbers.nagad = String(nagad).trim();
 
   return {
     ok: true,
@@ -376,8 +373,8 @@ function validateSubmission_(d) {
   if (!d.batchId || String(d.batchId).trim() === '') {
     return fail_('VALIDATION_FAILED', 'Please select a batch.');
   }
-  if (d.paymentMethod !== 'bKash' && d.paymentMethod !== 'Nagad') {
-    return fail_('VALIDATION_FAILED', 'Payment method must be bKash or Nagad.');
+  if (d.paymentMethod !== 'bKash') {
+    return fail_('VALIDATION_FAILED', 'Payment method must be bKash.');
   }
   if (!d.senderNumber || !MOBILE_RE.test(String(d.senderNumber).trim())) {
     return fail_('VALIDATION_FAILED', 'Please enter the number you sent the payment from (01XXXXXXXXX).');

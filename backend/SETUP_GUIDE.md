@@ -78,7 +78,7 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfyc.../exec";
 
 ## 4. পেমেন্ট নম্বর বসানো (Payment Numbers)
 
-**কোনো bKash/Nagad নম্বর কোডে লেখা নেই এবং লেখা যাবে না।** নম্বর শুধু Settings sheet থেকে পড়া হয়।
+**কোনো bKash নম্বর কোডে লেখা নেই এবং লেখা যাবে না।** নম্বর শুধু Settings sheet থেকে পড়া হয়।
 
 1. Spreadsheet-এ নতুন একটি sheet তৈরি করুন, নাম: **`Settings`**
 2. প্রথম সারিতে header: `Key` | `Value`
@@ -87,7 +87,6 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfyc.../exec";
 | Key | Value |
 |-----|-------|
 | payment_bkash | 01XXXXXXXXX |
-| payment_nagad | 01XXXXXXXXX |
 
 4. (ঐচ্ছিক) ব্যবসার তথ্যও এখান থেকে বদলানো যায়:
 
@@ -112,7 +111,7 @@ Serial Number · Student ID · Submission Date & Time · Student Name · Mobile 
 **যা করবেন:**
 - **সব আবেদন দেখা:** Admissions sheet খুললেই নতুন আবেদন সবার নিচে নতুন row হিসেবে আসে।
 - **Student ID:** প্রতিটি আবেদনে স্বয়ংক্রিয়ভাবে তৈরি হয় — `RC-2026-0001`, `RC-2026-0002`, … (একই সময়ে একাধিক আবেদন এলেও ID কখনো duplicate হয় না)।
-- **পেমেন্ট যাচাই:** Payment Method, Sender Number, Transaction ID, Amount, Payment Date দেখে bKash/Nagad অ্যাপে মিলিয়ে নিন।
+- **পেমেন্ট যাচাই:** Payment Method, Sender Number, Transaction ID, Amount, Payment Date দেখে bKash অ্যাপে মিলিয়ে নিন।
 - **Receipt খোলা:** Receipt File Link কলামের লিংকে ক্লিক করলেই Drive-এর রসিদের ছবি খুলবে (ফাইল private থাকে — শুধু আপনি খুলতে পারবেন)।
 - **Status পরিবর্তন:** Admission Status কলামে লিখুন `Pending` / `Approved` / `Rejected`।
 - **Pending / Approved / Rejected দেখা:** Google Sheets-এ **Data → Filter views → Create new filter view** দিয়ে Status কলামে filter করুন, অথবা **Data → Filter** চালু করে Status অনুযায়ী ছাঁকুন।
